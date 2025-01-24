@@ -95,6 +95,7 @@ def parse_headers():
     filename = 'headers.txt' # Replace with the actual file path for headers
     headers = {}
     with open(filename, 'r') as file:
+        next(file) 
         for line in file:
             # Strip whitespace and check if the line is not empty
             if "GET" in line: # Ignores the first line
