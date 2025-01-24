@@ -49,6 +49,8 @@ as name, year, and major. The page also contains links to access the
 individual's personal information.'''
 # Main scraping function
 def scrape_main_page(file_path):
+
+    print(file_path)
     with open(file_path, 'r', encoding='utf-8') as file:
         soup = BeautifulSoup(file, 'html.parser')
 
@@ -95,6 +97,8 @@ def parse_headers():
     with open(filename, 'r') as file:
         for line in file:
             # Strip whitespace and check if the line is not empty
+            if "GET" in line: # Ignores the first line
+                break
             line = line.strip()
             if line:
                 # Split on the first ':', in case the value contains ':'
