@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import csv
 import re
 
-HTML_FILE = "amherst-directory-scraper/Amherst College_ Alumni Directory_ Basic Search.html"
+HTML_FILE = "Amherst College_ Alumni Directory_ Basic Search.html"
 
 '''This function reads the individual's personal page. The page often has details such
 as address, email, and phone number.'''
@@ -89,7 +89,7 @@ def save_to_csv(data_list, filename):
 
 # Turning headers.txt into a Python dictionary
 def parse_headers():
-    filename = 'amherst-directory-scraper/headers.txt' # Replace with the actual file path for headers
+    filename = 'headers.txt' # Replace with the actual file path for headers
     headers = {}
     with open(filename, 'r') as file:
         for line in file:
