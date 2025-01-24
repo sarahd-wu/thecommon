@@ -1,3 +1,4 @@
+GET /api/alumni_profile/
 Accept: 
 Accept-Encoding: 
 Accept-Language: 
