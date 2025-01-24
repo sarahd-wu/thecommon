@@ -2,8 +2,9 @@ import requests
 from bs4 import BeautifulSoup
 import csv
 import re
+import sys
 
-HTML_FILE = "Amherst College_ Alumni Directory_ Basic Search.html"
+HTML_FILE = sys.argv[1]
 
 '''This function reads the individual's personal page. The page often has details such
 as address, email, and phone number.'''
