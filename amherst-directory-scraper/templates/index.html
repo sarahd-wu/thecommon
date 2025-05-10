@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Amherst Alumni Database Form</title>
+    <style>
+        /* Spinner animation */
+        .spinner {
+          border: 8px solid #f3f3f3;
+          border-top: 8px solid #3498db;
+          border-radius: 50%;
+          width: 60px;
+          height: 60px;
+          animation: spin 1s linear infinite;
+        }
+    
+        @keyframes spin {
+          0%   { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+    
+        /* Fullscreen overlay */
+        #loading-overlay {
+          display: none;
+          position: fixed;
+          top: 0; left: 0;
+          width: 100vw;
+          height: 100vh;
+          background: rgba(255, 255, 255, 0.85);
+          z-index: 9999;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+        }
+    
+        #loading-text {
+          margin-top: 16px;
+          font-family: sans-serif;
+          color: #333;
+        }
+      </style>
+      <script>
+        function showLoading() {
+          document.getElementById('loading-overlay').style.display = 'flex';
+        }
+      </script>
+</head>
+<body>
+    <h1>Submit Form</h1>
+    <form action="/submit" method="POST" onsubmit="showLoading()">
+        <label>Amherst Email: <input type="text" name="username"></label><br>
+        <label>Password: <input type="password" name="password"></label><br><br>
+        <p>If the text is highlighted <span style="color:blue">blue</span>, then you can submit multiple categories using a comma.</p>
+        <label>Name: <input type="text" name="name"></label><br>
+        <label>Class Start: <input type="text" name="classstart" value="2003"></label><br>
+        <label>Class End: <input type="text" name="classend" value="2003"></label><br>
+        <label><span style="color:blue">Major:</span> <input type="text" name="major" value="English, Computer Science"> </label><br>
+        <label>Industry Keyword: <input type="text" name="industrykeyword"></label><br>
+        <label><span style="color:blue">Advanced Industry Keywords:</span> <input type="text" name="industrykeywordadv">  </label> <br>
+        <label>City: <input type="text" name="addresscity"></label><br>
+        <label><span style="color:blue">State:</span> <input type="text" name="addressstate"></label><br>
+        <label><span style="color:blue">Country:</span> <input type="text" name="addresscountry"></label><br>
+        <label>Deceased:
+            <input type="checkbox" name="deceased" value="true">
+        </label><br>
+        <label>Employer Name: <input type="text" name="employername"></label><br>
+        <label>Employment Title: <input type="text" name="employmenttitle"></label><br>
+        <label>Employment City: <input type="text" name="employmentcity"></label><br>
+        <label><span style="color:blue">Employment State:</span> <input type="text" name="employmentstate"></label><br>
+        <label><span style="color:blue">Employment Country:</span> <input type="text" name="employmentcountry"></label><br>
+        <label>Industry: <input type="text" name="industry"></label><br>
+        <label>Secondary School: <input type="text" name="secondaryschool"></label><br>
+        <label>Higher Ed Program: <input type="text" name="higheredprogram"></label><br>
+        <label>Higher Ed Institution: <input type="text" name="higheredinstitution"></label><br>
+        <label><span style="color:blue">Degree Types:</span> <input type="text" name="degreetype"></label><br>
+        <label><span style="color:blue">Affinities:</span> <input type="text" name="affinities"></label><br>
+        <label><span style="color:blue">Interest Groups:</span> <input type="text" name="interestgroups"></label><br>
+        <label>Extracurricular Activities: <input type="text" name="extracurricularactivities"></label><br>
+        <label><span style="color:blue">Fraternities:</span> <input type="text" name="fraternities"></label><br>
+        <label><span style="color:blue">Athletics:</span> <input type="text" name="athletics"></label><br>
+        <label><span style="color:blue">Dorm Building:</span> <input type="text" name="dormbuilding"></label><br>
+        <input type="submit" value="Submit">
+    </form>
+
+    <div id="loading-overlay">
+        <div class="spinner"></div>
+        <div id="loading-text">Loading... Please wait</div>
+      </div>
+
+</body>
+</html>
