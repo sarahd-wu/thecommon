@@ -1,7 +1,7 @@
 import requests
 import time
 from cookies import fetch_cookies
-from utils import save_to_csv
+from utils import save_to_csv, get_resource_path
 
 # Fetch cookies and CSRF token
 def fetch_session_with_cookies(username, password):
@@ -85,5 +85,4 @@ def main(payload, username, password):
 
     response, url = search_alumni(session, headers, payload) # Make POST request to search alumni
     data_list = scrape_search_results(session, headers, url, params, delay=10)  # Scrape data from the search results
-    save_to_csv(data_list, 'output.csv') # Save the data to CSV
-    return('output.csv') # Returns filepath to Flask app
+    return save_to_csv(data_list, get_resource_path('output.csv')) # Save the data to CSV

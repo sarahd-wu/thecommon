@@ -1,90 +1,277 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Amherst Alumni Database Form</title>
-    <style>
-        /* Spinner animation */
-        .spinner {
-          border: 8px solid #f3f3f3;
-          border-top: 8px solid #3498db;
-          border-radius: 50%;
-          width: 60px;
-          height: 60px;
-          animation: spin 1s linear infinite;
-        }
-    
-        @keyframes spin {
-          0%   { transform: rotate(0deg); }
-          100% { transform: rotate(360deg); }
-        }
-    
-        /* Fullscreen overlay */
-        #loading-overlay {
-          display: none;
-          position: fixed;
-          top: 0; left: 0;
-          width: 100vw;
-          height: 100vh;
-          background: rgba(255, 255, 255, 0.85);
-          z-index: 9999;
-          justify-content: center;
-          align-items: center;
-          flex-direction: column;
-        }
-    
-        #loading-text {
-          margin-top: 16px;
-          font-family: sans-serif;
-          color: #333;
-        }
-      </style>
-      <script>
-        function showLoading() {
-          document.getElementById('loading-overlay').style.display = 'flex';
-        }
-      </script>
+  <title>Amherst Alumni Database Form</title>
+  <style>
+    /* Reset and base */
+    body {
+      background: #2a2a2a;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: white;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    /* Container */
+    form {
+      background: white;
+      color: #3f1f69;
+      padding: 30px 40px;
+      border-radius: 8px;
+      max-width: 600px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    /* Headings */
+    h1 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #3f1f69;
+    }
+
+    /* Labels */
+    label {
+      display: block;
+      margin-bottom: 12px;
+      font-weight: 600;
+      font-size: 0.95em;
+      color: #3f1f69;
+    }
+
+    /* Inputs */
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 8px 12px;
+      margin-top: 4px;
+      border: 2px solid #ccc;
+      border-radius: 5px;
+      font-size: 1em;
+      box-sizing: border-box;
+      transition: border-color 0.3s ease;
+      color: #333;
+    }
+    input[type="text"]:focus,
+    input[type="password"]:focus {
+      border-color: #3f1f69;
+      outline: none;
+    }
+
+    /* Checkbox label */
+    label input[type="checkbox"] {
+      margin-left: 10px;
+      vertical-align: middle;
+      width: auto;
+    }
+
+    /* Blue & Red highlights for special spans */
+    span {
+      color: #3f1f69;
+      font-weight: 700;
+    }
+
+    span.blue {
+      color: #0099bc !important;
+    }
+
+    span.red {
+      color: red !important;
+    }
+
+    /* Paragraph info */
+    p {
+      color: #555;
+      font-size: 0.9em;
+      margin-bottom: 18px;
+    }
+
+    /* Submit button */
+    input[type="submit"] {
+      background-color: #3f1f69;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 14px 30px;
+      font-size: 1.1em;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      width: 100%;
+      margin-top: 15px;
+    }
+    input[type="submit"]:hover {
+      background-color: #311a4d;
+    }
+
+    /* Spinner animation */
+    .spinner {
+      border: 8px solid #f3f3f3;
+      border-top: 8px solid #3f1f69;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0%   { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Fullscreen overlay */
+    #loading-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(255, 255, 255, 0.85);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #3f1f69;
+      gap: 20px; /* add spacing between spinner and text */
+      font-weight: 700;
+      font-size: 1.2em;
+    }
+  </style>
+  <script>
+    function showLoading() {
+      document.getElementById('loading-overlay').style.display = 'flex';
+    }
+  </script>
 </head>
 <body>
+  <form action="/submit" method="POST" onsubmit="showLoading()">
     <h1>Submit Form</h1>
-    <form action="/submit" method="POST" onsubmit="showLoading()">
-        <label>Amherst Email: <input type="text" name="username"></label><br>
-        <label>Password: <input type="password" name="password"></label><br><br>
-        <p>If the text is highlighted <span style="color:blue">blue</span>, then you can submit multiple categories using a comma.</p>
-        <label>Name: <input type="text" name="name"></label><br>
-        <label>Class Start: <input type="text" name="classstart" value="2003"></label><br>
-        <label>Class End: <input type="text" name="classend" value="2003"></label><br>
-        <label><span style="color:blue">Major:</span> <input type="text" name="major" value="English, Computer Science"> </label><br>
-        <label>Industry Keyword: <input type="text" name="industrykeyword"></label><br>
-        <label><span style="color:blue">Advanced Industry Keywords:</span> <input type="text" name="industrykeywordadv">  </label> <br>
-        <label>City: <input type="text" name="addresscity"></label><br>
-        <label><span style="color:blue">State:</span> <input type="text" name="addressstate"></label><br>
-        <label><span style="color:blue">Country:</span> <input type="text" name="addresscountry"></label><br>
-        <label>Deceased:
-            <input type="checkbox" name="deceased" value="true">
-        </label><br>
-        <label>Employer Name: <input type="text" name="employername"></label><br>
-        <label>Employment Title: <input type="text" name="employmenttitle"></label><br>
-        <label>Employment City: <input type="text" name="employmentcity"></label><br>
-        <label><span style="color:blue">Employment State:</span> <input type="text" name="employmentstate"></label><br>
-        <label><span style="color:blue">Employment Country:</span> <input type="text" name="employmentcountry"></label><br>
-        <label>Industry: <input type="text" name="industry"></label><br>
-        <label>Secondary School: <input type="text" name="secondaryschool"></label><br>
-        <label>Higher Ed Program: <input type="text" name="higheredprogram"></label><br>
-        <label>Higher Ed Institution: <input type="text" name="higheredinstitution"></label><br>
-        <label><span style="color:blue">Degree Types:</span> <input type="text" name="degreetype"></label><br>
-        <label><span style="color:blue">Affinities:</span> <input type="text" name="affinities"></label><br>
-        <label><span style="color:blue">Interest Groups:</span> <input type="text" name="interestgroups"></label><br>
-        <label>Extracurricular Activities: <input type="text" name="extracurricularactivities"></label><br>
-        <label><span style="color:blue">Fraternities:</span> <input type="text" name="fraternities"></label><br>
-        <label><span style="color:blue">Athletics:</span> <input type="text" name="athletics"></label><br>
-        <label><span style="color:blue">Dorm Building:</span> <input type="text" name="dormbuilding"></label><br>
-        <input type="submit" value="Submit">
-    </form>
 
-    <div id="loading-overlay">
-        <div class="spinner"></div>
-        <div id="loading-text">Loading... Please wait</div>
-      </div>
+    <label>Amherst Email: <span class="red">*</span>
+      <input type="text" name="username" required>
+    </label>
 
+    <label>Password: <span class="red">*</span>
+      <input type="password" name="password" required>
+    </label>
+
+    <p>If the text is highlighted <span class="blue">blue</span>, you can submit multiple categories with a comma.</p>
+
+    <label>Name:
+      <input type="text" name="name">
+    </label>
+
+    <label>Class Start:
+      <input type="text" name="classstart" value="2003">
+    </label>
+
+    <label>Class End:
+      <input type="text" name="classend" value="2003">
+    </label>
+
+    <label><span class="blue">Major:</span>
+      <input type="text" name="major" value="English, Computer Science">
+    </label>
+
+    <label>Industry Keyword:
+      <input type="text" name="industrykeyword">
+    </label>
+
+    <label><span class="blue">Advanced Industry Keywords:</span>
+      <input type="text" name="industrykeywordadv">
+    </label>
+
+    <label>City:
+      <input type="text" name="addresscity">
+    </label>
+
+    <label><span class="blue">State:</span>
+      <input type="text" name="addressstate">
+    </label>
+
+    <label><span class="blue">Country:</span>
+      <input type="text" name="addresscountry">
+    </label>
+
+    <label>Deceased:
+      <input type="checkbox" name="deceased" value="true">
+    </label>
+
+    <label>Employer Name:
+      <input type="text" name="employername">
+    </label>
+
+    <label>Employment Title:
+      <input type="text" name="employmenttitle">
+    </label>
+
+    <label>Employment City:
+      <input type="text" name="employmentcity">
+    </label>
+
+    <label><span class="blue">Employment State:</span>
+      <input type="text" name="employmentstate">
+    </label>
+
+    <label><span class="blue">Employment Country:</span>
+      <input type="text" name="employmentcountry">
+    </label>
+
+    <label>Industry:
+      <input type="text" name="industry">
+    </label>
+
+    <label>Secondary School:
+      <input type="text" name="secondaryschool">
+    </label>
+
+    <label>Higher Ed Program:
+      <input type="text" name="higheredprogram">
+    </label>
+
+    <label>Higher Ed Institution:
+      <input type="text" name="higheredinstitution">
+    </label>
+
+    <label><span class="blue">Degree Types:</span>
+      <input type="text" name="degreetype">
+    </label>
+
+    <label><span class="blue">Affinities:</span>
+      <input type="text" name="affinities">
+    </label>
+
+    <label><span class="blue">Interest Groups:</span>
+      <input type="text" name="interestgroups">
+    </label>
+
+    <label>Extracurricular Activities:
+      <input type="text" name="extracurricularactivities">
+    </label>
+
+    <label><span class="blue">Fraternities:</span>
+      <input type="text" name="fraternities">
+    </label>
+
+    <label><span class="blue">Athletics:</span>
+      <input type="text" name="athletics">
+    </label>
+
+    <label><span class="blue">Dorm Building:</span>
+      <input type="text" name="dormbuilding">
+    </label>
+
+    <input type="submit" value="Submit">
+  </form>
+
+  <div id="loading-overlay">
+    <div class="spinner"></div>
+    <div id="loading-text">Loading... Please wait</div>
+  </div>
 </body>
 </html>

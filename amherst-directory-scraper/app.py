@@ -1,13 +1,17 @@
 from flask import Flask, request, render_template, send_file
 from backend import main
-import os
-import sys
+from utils import get_resource_path
 
 app = Flask(__name__)
 
 @app.route('/')
 def form():
     return render_template('index.html')
+
+@app.route('/download')
+def download():
+    final_path = get_resource_path("output.csv")
+    return send_file(final_path, as_attachment=True)
 
 @app.route('/submit', methods=['POST'])
 def submit():
@@ -46,8 +50,7 @@ def submit():
             "athletics": parse_list("athletics"),
             "dormbuilding": parse_list("dormbuilding")
         }
-        csv_file_path = main(payload, username, password)  # returns path like 'output.csv'
-        send_file(csv_file_path, as_attachment=True)
+        main(payload, username, password)  # updates output.csv
         return render_template('result.html')
     
     except Exception as e:
